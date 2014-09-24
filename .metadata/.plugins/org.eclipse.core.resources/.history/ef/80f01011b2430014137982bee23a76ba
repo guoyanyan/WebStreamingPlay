@@ -1,0 +1,67 @@
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(value = "/file")
+public class FileController {
+
+    private static final Log logger = LogFactory.getLog(FileController.class);
+    @Autowired
+    private ServletContext   servletContext;
+
+    public ServletContext getServletContext() {
+        return servletContext;
+    }
+
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
+
+    @RequestMapping("/download")
+    public void fileDownload(HttpServletResponse response) {
+        // 鑾峰彇缃戠珯閮ㄧ讲璺緞(閫氳繃ServletContext瀵硅薄)锛岀敤浜庣‘瀹氫笅杞芥枃浠朵綅缃紝浠庤�瀹炵幇涓嬭浇
+        String path = servletContext.getRealPath("/");
+
+        // 1.璁剧疆鏂囦欢ContentType绫诲瀷锛岃繖鏍疯缃紝浼氳嚜鍔ㄥ垽鏂笅杞芥枃浠剁被鍨�
+        response.setContentType("multipart/form-data");
+        // 2.璁剧疆鏂囦欢澶达細鏈�悗涓�釜鍙傛暟鏄缃笅杞芥枃浠跺悕(鍋囧鎴戜滑鍙玜.pdf)
+        response.setHeader("Content-Disposition", "attachment;fileName=" + "see.mp3");
+        ServletOutputStream out;
+        // 閫氳繃鏂囦欢璺緞鑾峰緱File瀵硅薄(鍋囧姝よ矾寰勪腑鏈変竴涓猟ownload.pdf鏂囦欢)
+        String mp3Path = "E://see.mp3";
+        logger.debug(mp3Path);
+        File file = new File(mp3Path);
+
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            // 3.閫氳繃response鑾峰彇ServletOutputStream瀵硅薄(out)
+            out = response.getOutputStream();
+
+            int b = 0;
+            byte[] buffer = new byte[512];
+            while (b != -1) {
+                b = inputStream.read(buffer);
+                // 4.鍐欏埌杈撳嚭娴�out)涓�
+                out.write(buffer, 0, b);
+            }
+            inputStream.close();
+            out.close();
+            out.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

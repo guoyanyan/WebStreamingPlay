@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+E:\github\WebStreamingPlay\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2873975054.index
+2162688639.index
+566996903.index
+1113445891.index
+3053803948.index
+1354946728.index

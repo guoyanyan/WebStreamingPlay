@@ -1,0 +1,69 @@
+log4j.rootLogger=INFO,console
+
+#console loggr
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d %p [%c] - %m%n
+
+#main logger
+log4j.category.com.jd=INFO,mealticklogger
+log4j.additivity.mealticklogger=false
+log4j.appender.mealticklogger=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.mealticklogger.DatePattern='.'yyyy-MM-dd
+log4j.appender.mealticklogger.File=/log/streaming/streaming.log
+log4j.appender.mealticklogger.layout=org.apache.log4j.PatternLayout
+log4j.appender.mealticklogger.layout.ConversionPattern=%d %p [%c] - %m%n
+
+#record quartz exception
+log4j.category.org.quartz=DEBUG,quartzLogger
+log4j.category.com.jd.service.quartz=DEBUG,quartzLogger
+log4j.additivity.quartzLogger=false
+log4j.appender.quartzLogger=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.quartzLogger.DatePattern='.'yyyy-MM-dd
+log4j.appender.quartzLogger.File=/log/streaming/quartz.log
+log4j.appender.quartzLogger.layout=org.apache.log4j.PatternLayout
+log4j.appender.quartzLogger.layout.ConversionPattern=%d %p [%c] - %m%n
+
+#record settle exception
+log4j.category.com.jd.service.common.impl=DEBUG,settleLogger
+log4j.additivity.settleLogger=false
+log4j.appender.settleLogger=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.settleLogger.DatePattern='.'yyyy-MM-dd
+log4j.appender.settleLogger.File=/log/streaming/settle.log
+log4j.appender.settleLogger.layout=org.apache.log4j.PatternLayout
+log4j.appender.settleLogger.layout.ConversionPattern=%d %p [%c] - %m%n
+
+#record mail send exception
+log4j.category.mailLogger=DEBUG,mailLogger
+log4j.additivity.mailLogger=false
+log4j.appender.mailLogger=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.mailLogger.DatePattern='.'yyyy-MM-dd
+log4j.appender.mailLogger.File=/log/streaming/mail.log
+log4j.appender.mailLogger.layout=org.apache.log4j.PatternLayout
+log4j.appender.mailLogger.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss}|%m%n
+ 
+log4j.category.org.springframework=DEBUG
+log4j.category.com.google.code.yanf4j=INFO
+log4j.category.net.rubyeye.xmemcached=INFO
+log4j.category.org.apache.bval.jsr303=INFO
+
+log4j.category.openjpa.Tool=DEBUG
+log4j.category.openjpa.Runtime=TRACE
+log4j.category.openjpa.Remote=DEBUG
+log4j.category.openjpa.DataCache=DEBUG
+log4j.category.openjpa.MetaData=WARN
+log4j.category.openjpa.Enhance=INFO
+log4j.category.openjpa.Query=DEBUG
+log4j.category.openjpa.jdbc.SQL=DEBUG
+log4j.category.openjpa.jdbc.JDBC=DEBUG
+log4j.category.openjpa.jdbc.Schema=DEBUG
+log4j.category.com.mchange.v2=ERROR
+
+log4j.logger.com.ibatis=debug
+log4j.logger.com.ibatis.common.jdbc.SimpleDataSource=debug
+log4j.logger.com.ibatis.common.jdbc.ScriptRunner=debug
+log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate=debug
+log4j.logger.java.sql.Connection=debug
+log4j.logger.java.sql.Statement=debug
+log4j.logger.java.sql.PreparedStatement=debug,stdout
+
