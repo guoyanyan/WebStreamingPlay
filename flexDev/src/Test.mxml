@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[			
+			private var snd:Sound;
+			private var channel:SoundChannel;
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				//snd = new Sound(new URLRequest("C://Users//guoyanyan//Downloads//遇见.mp3"));
+				snd = new Sound(new URLRequest("http://127.0.0.1:8080/file/download"));
+				channel = snd.play();
+			}
+			protected function button3_clickHandler(event:MouseEvent):void
+			{
+				channel.stop();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:BorderContainer x="127" y="170" width="273" height="43">
+		<s:Button x="47" y="10" label="播放" click="button1_clickHandler(event)"/>
+		<s:Button x="151" y="10" label="停止" click="button3_clickHandler(event)"/>
+	</s:BorderContainer>
+</s:Application>
